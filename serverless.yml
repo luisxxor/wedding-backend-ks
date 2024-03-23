@@ -1,0 +1,23 @@
+service: wedding-backend
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  httpApi:
+    payload: '1.0'
+    cors: true
+  region: us-east-1
+  profile: wedding-backend
+  stage: prod
+
+functions:
+  getInvitationInfo:
+    handler: src/functions/getInvitationInfo.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-offline
